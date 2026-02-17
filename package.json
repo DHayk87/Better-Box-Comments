@@ -11,6 +11,13 @@
     "categories": [
         "Other"
     ],
+    "keywords": [
+        "comments",
+        "ascii",
+        "box",
+        "formatting",
+        "documentation"
+    ],
     "activationEvents": [
         "onStartupFinished",
         "onLanguage:*",
@@ -159,5 +166,14 @@
     },
     "devDependencies": {
         "@types/vscode": "^1.75.0"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DHayk87/Better-Box-Comments"
+    },
+    "bugs": {
+        "url": "https://github.com/DHayk87/Better-Box-Comments/issues"
+    },
+    "homepage": "https://github.com/DHayk87/Better-Box-Comments#readme",
+    "license": "MIT"
 }
