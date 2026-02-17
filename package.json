@@ -19,13 +19,7 @@
         "documentation"
     ],
     "activationEvents": [
-        "onStartupFinished",
-        "onLanguage:*",
-        "onCommand:better-box-comments.createBox",
-        "onCommand:better-box-comments.createTodoBox",
-        "onCommand:better-box-comments.createAlertBox",
-        "onCommand:better-box-comments.createInfoBox",
-        "onCommand:better-box-comments.createWarningBox"
+        "onStartupFinished"
     ],
     "main": "./extension.js",
     "contributes": {
