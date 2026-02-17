@@ -148,7 +148,7 @@ async function insertBox(tag = null) {
     let selection = editor.selection;
     const settings = getSettings();
 
-    // If no selection, select current line
+    // Use current line if empty
     if (selection.isEmpty) {
         const line = document.lineAt(selection.start.line);
         selection = new vscode.Selection(
@@ -196,7 +196,7 @@ async function insertBox(tag = null) {
         editBuilder.replace(selection, boxText);
     });
 
-    // Calculate the range of the new box
+    // Box range calculation
     const endLine = startLine + boxText.split("\n").length - 1;
     const newSelection = new vscode.Selection(
         new vscode.Position(startLine, 0),
@@ -204,10 +204,10 @@ async function insertBox(tag = null) {
     );
     editor.selection = newSelection;
 
-    // Auto-comment the box using VS Code command
+    // Apply VS Code commenting
     await vscode.commands.executeCommand("editor.action.addCommentLine");
 
-    // Move cursor to below the box
+    // Cursor positioning
     const nextLine = endLine + 1;
     if (nextLine < document.lineCount) {
         const position = new vscode.Position(nextLine, 0);

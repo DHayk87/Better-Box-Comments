@@ -9,16 +9,15 @@ let decorations = {};
 function activate(context) {
     console.log("Better Box Comments is now active!");
 
-    // Initialize decorations
     createDecorations();
 
-    // Helper to refresh decorations in a document
+    // Decoration refresh logic
     function updateDecorations(editor) {
         if (!editor || !decorations) return;
 
         const settings = vscode.workspace.getConfiguration("betterBoxComments");
 
-        // Symbols to look for (Current ones + Presets)
+        // Border symbol definitions
         const startSymbols = ["┌", "#", "=", "╔"];
         const endSymbols = ["┐", "#", "=", "╗"];
         const bottomStartSymbols = ["└", "#", "=", "╚"];
@@ -43,7 +42,7 @@ function activate(context) {
             "=",
         ];
 
-        // Add current custom ones
+        // Custom symbol support
         const customTl = settings.get("chars.tl");
         if (customTl) startSymbols.push(customTl);
         const customTr = settings.get("chars.tr");
@@ -69,16 +68,14 @@ function activate(context) {
             const line = lines[i];
             const trimmedLine = line.trim();
 
-            // 1. Identify if it's a border line
+            // Border/Tag detection
             const borderCharCount = [...trimmedLine].filter((c) =>
                 borderChars.includes(c),
             ).length;
             const isLikelyBorder = borderCharCount > 10;
             const tagMatch = trimmedLine.match(/\[(TODO|ALERT|INFO|WARNING)\]/i);
 
-            // 2. Logic to detect start and end
             if (tagMatch) {
-                // If we find a tag, it ALWAYS starts a new colored box
                 currentBox = { tag: tagMatch[1].toUpperCase(), startLine: i };
             } else if (isLikelyBorder) {
                 const isStartStyle =
@@ -103,15 +100,13 @@ function activate(context) {
             }
         }
 
-        // Apply decorations
         for (const tag in decorations) {
             editor.setDecorations(decorations[tag], decorationRanges[tag]);
         }
     }
 
-    // Function to create/recreate decorations with current colors
+    // Decoration init
     function createDecorations() {
-        // Dispose existing decorations if any
         if (decorations) {
             for (const key in decorations) {
                 decorations[key].dispose();
@@ -155,7 +150,7 @@ function activate(context) {
         };
     }
 
-    // Register Commands
+    // Command registrations
     context.subscriptions.push(
         vscode.commands.registerCommand("better-box-comments.createBox", () => {
             insertBox().then(() => updateDecorations(vscode.window.activeTextEditor));
@@ -182,7 +177,7 @@ function activate(context) {
         }),
     );
 
-    // Event Listeners for Persistence
+    // Event listeners
     vscode.window.onDidChangeActiveTextEditor(
         (editor) => {
             if (editor) {
@@ -217,7 +212,6 @@ function activate(context) {
         context.subscriptions,
     );
 
-    // Handle configuration changes
     vscode.workspace.onDidChangeConfiguration(
         (event) => {
             if (event.affectsConfiguration("betterBoxComments.colors")) {
@@ -231,7 +225,6 @@ function activate(context) {
         context.subscriptions,
     );
 
-    // Initial scan of visible editors
     vscode.window.visibleTextEditors.forEach((editor) => {
         updateDecorations(editor);
     });
