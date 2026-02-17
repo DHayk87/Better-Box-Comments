@@ -1,0 +1,163 @@
+{
+    "name": "better-box-comments",
+    "displayName": "Better Box Comments",
+    "description": "Generate ASCII box comments with Better Comments style coloring and persistence.",
+    "version": "0.1.0",
+    "publisher": "DHayk",
+    "icon": "images/logo.png",
+    "engines": {
+        "vscode": "^1.75.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onStartupFinished",
+        "onLanguage:*",
+        "onCommand:better-box-comments.createBox",
+        "onCommand:better-box-comments.createTodoBox",
+        "onCommand:better-box-comments.createAlertBox",
+        "onCommand:better-box-comments.createInfoBox",
+        "onCommand:better-box-comments.createWarningBox"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "better-box-comments.createBox",
+                "title": "Box: Create Standard Box"
+            },
+            {
+                "command": "better-box-comments.createTodoBox",
+                "title": "Box: Create TODO Box"
+            },
+            {
+                "command": "better-box-comments.createAlertBox",
+                "title": "Box: Create Alert Box"
+            },
+            {
+                "command": "better-box-comments.createInfoBox",
+                "title": "Box: Create INFO Box"
+            },
+            {
+                "command": "better-box-comments.createWarningBox",
+                "title": "Box: Create Warning Box"
+            }
+        ],
+        "configuration": {
+            "title": "Better Box Comments",
+            "properties": {
+                "betterBoxComments.borderStyle": {
+                    "type": "string",
+                    "default": "Default",
+                    "enum": [
+                        "Default",
+                        "Hash",
+                        "Equals",
+                        "Double",
+                        "Custom"
+                    ],
+                    "description": "The style of the ASCII border. 'Custom' uses the individual character settings below."
+                },
+                "betterBoxComments.chars.tl": {
+                    "type": "string",
+                    "default": "┌",
+                    "description": "Top-left corner character."
+                },
+                "betterBoxComments.chars.tm": {
+                    "type": "string",
+                    "default": "─",
+                    "description": "Top-middle (border) character."
+                },
+                "betterBoxComments.chars.tr": {
+                    "type": "string",
+                    "default": "┐",
+                    "description": "Top-right corner character."
+                },
+                "betterBoxComments.chars.l": {
+                    "type": "string",
+                    "default": "│",
+                    "description": "Left side character."
+                },
+                "betterBoxComments.chars.r": {
+                    "type": "string",
+                    "default": "│",
+                    "description": "Right side character."
+                },
+                "betterBoxComments.chars.bl": {
+                    "type": "string",
+                    "default": "└",
+                    "description": "Bottom-left corner character."
+                },
+                "betterBoxComments.chars.bm": {
+                    "type": "string",
+                    "default": "─",
+                    "description": "Bottom-middle (border) character."
+                },
+                "betterBoxComments.chars.br": {
+                    "type": "string",
+                    "default": "┘",
+                    "description": "Bottom-right corner character."
+                },
+                "betterBoxComments.chars.dl": {
+                    "type": "string",
+                    "default": "├",
+                    "description": "Divider-left character."
+                },
+                "betterBoxComments.chars.dm": {
+                    "type": "string",
+                    "default": "─",
+                    "description": "Divider-middle character."
+                },
+                "betterBoxComments.chars.dr": {
+                    "type": "string",
+                    "default": "┤",
+                    "description": "Divider-right character."
+                },
+                "betterBoxComments.indentation": {
+                    "type": "integer",
+                    "default": 2,
+                    "description": "Indentation amount for the box."
+                },
+                "betterBoxComments.length": {
+                    "type": "integer",
+                    "default": 80,
+                    "description": "Default line length for the box."
+                },
+                "betterBoxComments.colors.todo": {
+                    "type": "string",
+                    "default": "#3498db",
+                    "description": "Color for TODO boxes.",
+                    "format": "color-hex"
+                },
+                "betterBoxComments.colors.alert": {
+                    "type": "string",
+                    "default": "#e74c3c",
+                    "description": "Color for ALERT boxes.",
+                    "format": "color-hex"
+                },
+                "betterBoxComments.colors.info": {
+                    "type": "string",
+                    "default": "#2ecc71",
+                    "description": "Color for INFO boxes.",
+                    "format": "color-hex"
+                },
+                "betterBoxComments.colors.warning": {
+                    "type": "string",
+                    "default": "#f39c12",
+                    "description": "Color for WARNING boxes.",
+                    "format": "color-hex"
+                },
+                "betterBoxComments.colors.standard": {
+                    "type": "string",
+                    "default": "#dcdde1",
+                    "description": "Color for Standard boxes.",
+                    "format": "color-hex"
+                }
+            }
+        }
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.75.0"
+    }
+}
