@@ -2,6 +2,14 @@
 
 All notable changes to the "Better Box Comments" extension will be documented in this file.
 
+## [0.1.1] - 2026-02-25
+
+### Fixed
+
+- **Decoration Leakage**: Fixed a bug where comment separators (like `/* === */`) would cause subsequent code to be incorrectly colored.
+- **Improved Detection**: Added "Box Abandonment" logic to stop decorations if non-comment code is encountered.
+- **Separator Handling**: Refined logic so that single-line separators without tags maintain the default editor theme's comment color.
+
 ## [0.1.0] - 2026-02-18
 
 ### Added

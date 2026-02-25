@@ -68,6 +68,12 @@ function activate(context) {
             const line = lines[i];
             const trimmedLine = line.trim();
 
+            // Comment detection to prevent leaking into code
+            const isComment =
+                trimmedLine.startsWith("//") ||
+                trimmedLine.startsWith("/*") ||
+                trimmedLine.startsWith("*");
+
             // Border/Tag detection
             const borderCharCount = [...trimmedLine].filter((c) =>
                 borderChars.includes(c),
@@ -76,6 +82,7 @@ function activate(context) {
             const tagMatch = trimmedLine.match(/\[(TODO|ALERT|INFO|WARNING)\]/i);
 
             if (tagMatch) {
+                // New tag found, start a new box tracking (abandoning previous if any)
                 currentBox = { tag: tagMatch[1].toUpperCase(), startLine: i };
             } else if (isLikelyBorder) {
                 const isStartStyle =
@@ -95,7 +102,18 @@ function activate(context) {
                         currentBox = null;
                     }
                 } else if (isStartStyle) {
-                    currentBox = { tag: "STANDARD", startLine: i };
+                    // If it's both a start and bottom style (like a separator /* === */),
+                    // we don't decorate it as STANDARD to keep the default comment color.
+                    // Instead, we only start a box if it's not a single-line separator.
+                    if (!isBottomStyle) {
+                        currentBox = { tag: "STANDARD", startLine: i };
+                    }
+                }
+            } else if (currentBox) {
+                // Not a border and not a tag.
+                // If it's not a comment, or the box is suspiciously long, abandon it.
+                if (!isComment || i - currentBox.startLine > 20) {
+                    currentBox = null;
                 }
             }
         }

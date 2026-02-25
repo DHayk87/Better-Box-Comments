@@ -2,7 +2,7 @@
     "name": "better-box-comments",
     "displayName": "Better Box Comments",
     "description": "Generate ASCII box comments with Better Comments style coloring and persistence.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "publisher": "DHayk",
     "icon": "images/logo.png",
     "engines": {
