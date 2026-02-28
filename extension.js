@@ -1,5 +1,5 @@
-const vscode = require("vscode");
 const { insertBox } = require("./boxLogic");
+const { PRESETS } = require("./boxCore");
 
 let decorations = {};
 
@@ -17,30 +17,19 @@ function activate(context) {
 
         const settings = vscode.workspace.getConfiguration("betterBoxComments");
 
-        // Border symbol definitions
-        const startSymbols = ["┌", "#", "=", "╔"];
-        const endSymbols = ["┐", "#", "=", "╗"];
-        const bottomStartSymbols = ["└", "#", "=", "╚"];
-        const bottomEndSymbols = ["┘", "#", "=", "╝"];
-        const borderChars = [
-            "┌",
-            "┐",
-            "└",
-            "┘",
-            "├",
-            "┤",
-            "─",
-            "╔",
-            "╗",
-            "╚",
-            "╝",
-            "╠",
-            "╣",
-            "═",
-            "║",
-            "#",
-            "=",
-        ];
+        // Border symbol definitions from shared core
+        const startSymbols = Object.values(PRESETS).map((p) => p.tl);
+        const endSymbols = Object.values(PRESETS).map((p) => p.tr);
+        const bottomStartSymbols = Object.values(PRESETS).map((p) => p.bl);
+        const bottomEndSymbols = Object.values(PRESETS).map((p) => p.br);
+
+        // Collect all border characters for detection
+        const borderChars = [];
+        Object.values(PRESETS).forEach((p) => {
+            Object.values(p).forEach((char) => {
+                if (!borderChars.includes(char)) borderChars.push(char);
+            });
+        });
 
         // Custom symbol support
         const customTl = settings.get("chars.tl");

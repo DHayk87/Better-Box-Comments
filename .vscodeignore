@@ -1,0 +1,17 @@
+.vscode/**
+.vscode-test/**
+out/**
+images/**
+!images/logo.png
+node_modules/**
+CLIVersion/**
+.git/**
+.gitignore
+.vscodeignore
+CHANGELOG.md
+vsc-extension-quickstart.md
+package-lock.json
+tsconfig.json
+**/*.vsix
+**/*.map
+test/**
