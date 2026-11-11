@@ -2,7 +2,7 @@
     "name": "better-box-comments",
     "displayName": "Better Box Comments",
     "description": "Generate ASCII box comments with Better Comments style coloring and persistence.",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "publisher": "DHayk",
     "icon": "images/logo.png",
     "engines": {
@@ -22,6 +22,9 @@
         "onStartupFinished"
     ],
     "main": "./extension.js",
+    "scripts": {
+        "test": "node --test"
+    },
     "contributes": {
         "commands": [
             {
@@ -43,8 +46,67 @@
             {
                 "command": "better-box-comments.createWarningBox",
                 "title": "Box: Create Warning Box"
+            },
+            {
+                "command": "better-box-comments.createCustomTagBox",
+                "title": "Box: Create Box with Custom Tag..."
             }
         ],
+        "keybindings": [
+            {
+                "command": "better-box-comments.createBox",
+                "key": "ctrl+alt+b",
+                "mac": "cmd+alt+b",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "better-box-comments.createTodoBox",
+                "key": "ctrl+alt+t",
+                "mac": "cmd+alt+t",
+                "when": "editorTextFocus"
+            }
+        ],
+        "submenus": [
+            {
+                "id": "better-box-comments.contextSubmenu",
+                "label": "Better Box Comments"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "submenu": "better-box-comments.contextSubmenu",
+                    "group": "modification@100",
+                    "when": "editorTextFocus"
+                }
+            ],
+            "better-box-comments.contextSubmenu": [
+                {
+                    "command": "better-box-comments.createBox",
+                    "group": "1_basic"
+                },
+                {
+                    "command": "better-box-comments.createTodoBox",
+                    "group": "2_tags"
+                },
+                {
+                    "command": "better-box-comments.createAlertBox",
+                    "group": "2_tags"
+                },
+                {
+                    "command": "better-box-comments.createInfoBox",
+                    "group": "2_tags"
+                },
+                {
+                    "command": "better-box-comments.createWarningBox",
+                    "group": "2_tags"
+                },
+                {
+                    "command": "better-box-comments.createCustomTagBox",
+                    "group": "3_custom"
+                }
+            ]
+        },
         "configuration": {
             "title": "Better Box Comments",
             "properties": {
@@ -154,6 +216,11 @@
                     "default": "#dcdde1",
                     "description": "Color for Standard boxes.",
                     "format": "color-hex"
+                },
+                "betterBoxComments.maxBoxLines": {
+                    "type": "integer",
+                    "default": 200,
+                    "description": "Maximum number of lines allowed for a single box comment decoration."
                 }
             }
         }

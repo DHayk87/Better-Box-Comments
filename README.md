@@ -14,32 +14,37 @@ Generate ASCII box comments with "Better Comments" style coloring and persistenc
 
 ## Usage
 
-1. Select the text you want to wrap in a box.
-2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
-3. Search for:
+1. Select the text you want to wrap in a box (or position cursor on an empty line).
+2. Use a keyboard shortcut:
+   - `Ctrl+Alt+B` / `Cmd+Alt+B`: Create Standard Box
+   - `Ctrl+Alt+T` / `Cmd+Alt+T`: Create TODO Box
+3. Or right-click in the editor and choose **Better Box Comments** from the context menu.
+4. Or open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and search for:
     - `Box: Create Standard Box`
     - `Box: Create TODO Box`
     - `Box: Create Alert Box`
     - `Box: Create INFO Box`
     - `Box: Create Warning Box`
+    - `Box: Create Box with Custom Tag...` (prompts for any custom tag e.g. NOTE, FIXME, BUG)
 
 ## Configuration
 
 Customizable via VS Code Settings (`betterBoxComments.*`):
 
-| Setting                         | Description                                                           | Default   |
-| ------------------------------- | --------------------------------------------------------------------- | --------- |
-| `betterBoxComments.borderStyle` | The style of the ASCII border (Default, Hash, Equals, Double, Custom) | `Default` |
-| `betterBoxComments.length`      | Total line length of the box                                          | `80`      |
-| `betterBoxComments.indentation` | Indent amount for the box                                             | `2`       |
-| `betterBoxComments.chars.tl`    | Top-left corner character (used if style is `Custom`)                 | `┌`       |
-| `betterBoxComments.chars.tm`    | Top-middle (border) character (used if style is `Custom`)             | `─`       |
-| `betterBoxComments.chars.tr`    | Top-right corner character (used if style is `Custom`)                | `┐`       |
-| `betterBoxComments.chars.l`     | Left side character (used if style is `Custom`)                       | `│`       |
-| `betterBoxComments.chars.r`     | Right side character (used if style is `Custom`)                      | `│`       |
-| `betterBoxComments.chars.bl`    | Bottom-left corner character (used if style is `Custom`)              | `└`       |
-| `betterBoxComments.chars.bm`    | Bottom-middle (border) character (used if style is `Custom`)          | `─`       |
-| `betterBoxComments.chars.br`    | Bottom-right corner character (used if style is `Custom`)             | `┘`       |
+| Setting | Description | Default |
+| --- | --- | --- |
+| `betterBoxComments.borderStyle` | Border preset (`Default`, `Hash`, `Equals`, `Double`, `Custom`) | `Default` |
+| `betterBoxComments.length` | Total line length of the box | `80` |
+| `betterBoxComments.indentation` | Indent amount for the box | `2` |
+| `betterBoxComments.maxBoxLines` | Maximum allowed line count for box decoration parsing | `200` |
+| `betterBoxComments.chars.tl` | Top-left corner character (used if style is `Custom`) | `┌` |
+| `betterBoxComments.chars.tm` | Top-middle border character (used if style is `Custom`) | `─` |
+| `betterBoxComments.chars.tr` | Top-right corner character (used if style is `Custom`) | `┐` |
+| `betterBoxComments.chars.l` | Left side character (used if style is `Custom`) | `│` |
+| `betterBoxComments.chars.r` | Right side character (used if style is `Custom`) | `│` |
+| `betterBoxComments.chars.bl` | Bottom-left corner character (used if style is `Custom`) | `└` |
+| `betterBoxComments.chars.bm` | Bottom-middle border character (used if style is `Custom`) | `─` |
+| `betterBoxComments.chars.br` | Bottom-right corner character (used if style is `Custom`) | `┘` |
 
 ## How to Customize
 
